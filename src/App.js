@@ -36,7 +36,7 @@ class App extends React.Component
 
         console.log(data);
 
-        //update our states using the data in our json string
+        //update our states using the data in our json string. notice that weather is an array
         this.setState({
             temperature: data.main.temp,
             city: data.name,
@@ -54,7 +54,14 @@ class App extends React.Component
             <div>
                 <Titles />
                 <Form getWeatherProp={this.getWeather}/>
-                <Weather />
+                <Weather 
+                    temperatureProp={this.state.temperature}
+                    cityProp={this.state.city}
+                    countryProp={this.state.country}
+                    humidityProp={this.state.humidity}
+                    descriptionProp={this.state.description}
+                    errorProp={this.state.error} 
+                />
             </div>
         );
     }

@@ -16,7 +16,7 @@ class App extends React.Component
         country: undefined,
         humidity: undefined,
         description: undefined,
-        error: undefined
+        error: undefined,
     }
 
     //arrow function to make api call
@@ -43,7 +43,7 @@ class App extends React.Component
             country: data.sys.country,
             humidity: data.main.humidity,
             description: data.weather[0].description,
-            error: ""
+            error: "",
         });
     }
 

@@ -1,4 +1,30 @@
-import React, { Component } from 'react';
+import React from "react";
+import Titles from "./components/titles"
+
+//initialize a component
+class App extends React.Component
+{
+    render() {
+        //return JSX code
+        return (
+            <div>
+                <Titles />
+            </div>
+        );
+    }
+}
+
+export default App;
+
+
+
+
+
+
+
+
+
+/*import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -19,3 +45,4 @@ class App extends Component {
 }
 
 export default App;
+*/

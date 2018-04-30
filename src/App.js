@@ -1,5 +1,7 @@
 import React from "react";
+
 import Titles from "./components/titles"
+import Form from "./components/form"
 
 //initialize a component
 class App extends React.Component
@@ -9,6 +11,7 @@ class App extends React.Component
         return (
             <div>
                 <Titles />
+                <Form />
             </div>
         );
     }

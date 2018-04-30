@@ -2,6 +2,7 @@ import React from "react";
 
 import Titles from "./components/titles"
 import Form from "./components/form"
+import Weather from "./components/weather"
 
 //initialize a component
 class App extends React.Component
@@ -12,17 +13,13 @@ class App extends React.Component
             <div>
                 <Titles />
                 <Form />
+                <Weather />
             </div>
         );
     }
 }
 
 export default App;
-
-
-
-
-
 
 
 

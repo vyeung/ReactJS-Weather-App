@@ -34,17 +34,47 @@ class App extends React.Component
         //convert data we get back to json
         var data = await apiCall.json();
 
-        console.log(data);
+        //make sure user fills out both fields
+        if(city && country) {
+            //make sure the entered city is actually a real one
+            if(data.message === "city not found") {
+                console.log(data);
+                this.setState({
+                    temperature: undefined,
+                    city: undefined,
+                    country: undefined,
+                    humidity: undefined,
+                    description: undefined,
+                    error: "",
+                });
+                alert("Unknown location. Please try again");
+            }
+            else {
+                console.log(data);
 
-        //update our states using the data in our json string. notice that weather is an array
-        this.setState({
-            temperature: data.main.temp,
-            city: data.name,
-            country: data.sys.country,
-            humidity: data.main.humidity,
-            description: data.weather[0].description,
-            error: "",
-        });
+                //update our states using the data in our json string. 
+                //notice that weather is an array.
+                this.setState({
+                    temperature: data.main.temp,
+                    city: data.name,
+                    country: data.sys.country,
+                    humidity: data.main.humidity,
+                    description: data.weather[0].description,
+                    error: "",
+                });
+            }
+        }
+        else {
+            this.setState({
+                temperature: undefined,
+                city: undefined,
+                country: undefined,
+                humidity: undefined,
+                description: undefined,
+                error: "Please fill out both fields",
+            });
+            alert("Please fill out both fields");
+        }
     }
 
     render() {
@@ -68,29 +98,3 @@ class App extends React.Component
 }
 
 export default App;
-
-
-
-
-/*import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
-}
-
-export default App;
-*/

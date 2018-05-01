@@ -16,3 +16,19 @@ class Weather extends React.Component
 }
 
 export default Weather;
+
+
+/* Stateless functional component version 
+const Weather = (props) =>
+{
+    return (
+        <div>
+            <p>Location: {props.cityProp} {props.countryProp}</p>
+            <p>Temperature: {props.temperatureProp}</p>
+            <p>Humidity: {props.humidityProp && <span>{props.humidityProp}%</span>}</p>
+            <p>Conditions: {props.descriptionProp}</p>
+        </div>
+    ); 
+}
+export default Weather;
+*/

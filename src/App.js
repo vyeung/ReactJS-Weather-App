@@ -16,6 +16,7 @@ class App extends React.Component
         country: undefined,
         humidity: undefined,
         description: undefined,
+        wind: undefined,
         error: undefined,
     }
 
@@ -45,6 +46,7 @@ class App extends React.Component
                     country: undefined,
                     humidity: undefined,
                     description: undefined,
+                    wind: undefined,
                     error: "",
                 });
                 alert("Unknown location. Please try again");
@@ -60,6 +62,7 @@ class App extends React.Component
                     country: data.sys.country,
                     humidity: data.main.humidity,
                     description: data.weather[0].description,
+                    wind: data.wind.speed,
                     error: "",
                 });
             }
@@ -71,6 +74,7 @@ class App extends React.Component
                 country: undefined,
                 humidity: undefined,
                 description: undefined,
+                wind: undefined,
                 error: "Please fill out both fields",
             });
             alert("Please fill out both fields");
@@ -98,6 +102,7 @@ class App extends React.Component
                                         countryProp={this.state.country}
                                         humidityProp={this.state.humidity}
                                         descriptionProp={this.state.description}
+                                        windProp={this.state.wind}
                                         errorProp={this.state.error} 
                                     />
                                 </div>

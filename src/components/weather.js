@@ -5,11 +5,25 @@ class Weather extends React.Component
     //humidity uses bizarre form of an if statement. purpose is for the %
     render() {
         return (
-            <div>
-                <p>Location: {this.props.cityProp} {this.props.countryProp}</p>
-                <p>Temperature: {this.props.temperatureProp && <span>{this.props.temperatureProp}°F</span>}</p>
-                <p>Humidity: {this.props.humidityProp && <span>{this.props.humidityProp}%</span>}</p>
-                <p>Conditions: {this.props.descriptionProp}</p>
+            <div className="weather__info">
+                <p className="weather__key">Location:
+                    <span className="weather__value"> {this.props.cityProp} {this.props.countryProp}
+                    </span>
+                </p>
+                <p className="weather__key">Temperature: 
+                    <span className="weather__value"> 
+                        {this.props.temperatureProp && <span className="weather__value"> {this.props.temperatureProp}°F</span>}
+                    </span>    
+                </p>
+                <p className="weather__key">Humidity: 
+                    <span className="weather__value"> 
+                        {this.props.humidityProp && <span className="weather__value"> {this.props.humidityProp}%</span>}
+                    </span>    
+                </p>
+                <p className="weather__key">Conditions: 
+                    <span className="weather__value"> {this.props.descriptionProp}
+                    </span>
+                </p>
             </div>
         ); 
     }

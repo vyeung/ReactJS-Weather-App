@@ -79,22 +79,46 @@ class App extends React.Component
 
     render() {
         //return JSX code.
-        //setting up props to connect our getWeather function which connects to the components 
+        //setting up props to connect our getWeather function which connects to the components.
+        //using bootstrap 
         return (
             <div>
-                <Titles />
-                <Form getWeatherProp={this.getWeather}/>
-                <Weather 
-                    temperatureProp={this.state.temperature}
-                    cityProp={this.state.city}
-                    countryProp={this.state.country}
-                    humidityProp={this.state.humidity}
-                    descriptionProp={this.state.description}
-                    errorProp={this.state.error} 
-                />
+                <div className="wrapper">
+                    <div className="main">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-sm-5 title-container">
+                                    <Titles />
+                                </div>
+                                <div className="col-sm-7 form-container">
+                                    <Form getWeatherProp={this.getWeather}/>
+                                    <Weather 
+                                        temperatureProp={this.state.temperature}
+                                        cityProp={this.state.city}
+                                        countryProp={this.state.country}
+                                        humidityProp={this.state.humidity}
+                                        descriptionProp={this.state.description}
+                                        errorProp={this.state.error} 
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
 }
+
+/*<Titles />
+<Form getWeatherProp={this.getWeather}/>
+<Weather 
+    temperatureProp={this.state.temperature}
+    cityProp={this.state.city}
+    countryProp={this.state.country}
+    humidityProp={this.state.humidity}
+    descriptionProp={this.state.description}
+    errorProp={this.state.error} 
+/>*/
 
 export default App;

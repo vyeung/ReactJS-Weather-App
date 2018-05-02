@@ -2,7 +2,7 @@ import React from "react";
 
 class Weather extends React.Component
 {
-    //humidity uses bizarre form of an if statement. purpose is for the %
+    //temperature and humidity uses bizarre form of an if statement. purpose is for the %
     render() {
         return (
             <div className="weather__info">

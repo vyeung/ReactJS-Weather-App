@@ -4,8 +4,8 @@ import Titles from "./components/titles";
 import Form from "./components/form";
 import Weather from "./components/weather";
 
-import defaultBG from "./imgs/bg.jpg"; 
-import rain from "./imgs/rain.jpg";
+//import defaultBG from "./imgs/bg.jpg"; 
+//import rain from "./imgs/rain.jpg";
 
 var API_KEY = "d5304abc4f34916873d7ce17376b4847";
 

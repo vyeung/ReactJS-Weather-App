@@ -1,8 +1,8 @@
 import React from "react";
 
-import Titles from "./components/titles";
-import Form from "./components/form";
-import Weather from "./components/weather";
+import Titles from "./components/Titles";
+import Form from "./components/Form";
+import Weather from "./components/Weather";
 
 //import defaultBG from "./imgs/bg.jpg"; 
 //import rain from "./imgs/rain.jpg";

@@ -1,6 +1,6 @@
 # ReactJS-Weather-App
 
-![screenshot](./src/imgs/screenshot.png)
+![screenshot](./src/assets/screenshot.png)
 
 Enter a city and the country its in.  Find out the current temperature, humidity, wind speed, and conditions that are there.  
 

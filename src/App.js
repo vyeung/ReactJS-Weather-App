@@ -3,9 +3,7 @@ import React from "react";
 //import Titles from "./components/Titles";
 import Form from "./components/Form";
 import CurrentWeather from "./components/CurrentWeather";
-
-//import defaultBG from "./imgs/bg.jpg"; 
-//import rain from "./imgs/rain.jpg";
+import CurrWeatherImg from "./components/CurrWeatherImg";
 
 var API_KEY = "d5304abc4f34916873d7ce17376b4847";
 
@@ -20,6 +18,7 @@ class App extends React.Component
     humidity: undefined,
     description: undefined,
     wind: undefined,
+    weatherId: undefined,
     error: undefined,
   }
 
@@ -57,6 +56,7 @@ class App extends React.Component
           humidity: data.main.humidity,
           description: data.weather[0].description,
           wind: data.wind.speed,
+          weatherId: data.weather[0].id,
           error: "",
         });
       }
@@ -71,7 +71,6 @@ class App extends React.Component
   render() {
     //return JSX code.
     //setting up props to connect our getWeather function which connects to the components.
-
     let showWeather = null;
     if(this.state.temperature) {
       showWeather = (
@@ -86,24 +85,25 @@ class App extends React.Component
       );
     }
 
+    let showWeatherImg = null;
+    if(this.state.temperature) {
+      showWeatherImg = <CurrWeatherImg weatherId={this.state.weatherId} />;
+    }
+
     return (
       <div className="MainDiv">
         <Form getWeatherProp={this.getCurrentWeather} />
-        {showWeather}
+        <div className="Current">
+          <div className="Current1">
+            {showWeather}
+          </div>
+          <div className="Current2">
+            {showWeatherImg}
+          </div>
+        </div>
       </div>
     );
   }
 }
-
-/*<Titles />
-<Form getWeatherProp={this.getWeather}/>
-<Weather 
-    temperatureProp={this.state.temperature}
-    cityProp={this.state.city}
-    countryProp={this.state.country}
-    humidityProp={this.state.humidity}
-    descriptionProp={this.state.description}
-    errorProp={this.state.error} 
-/>*/
 
 export default App;

@@ -54,7 +54,7 @@ class App extends React.Component
         //update our states using the data in our json string. 
         //notice that weather is an array.
         this.setState({
-          temperature: data.main.temp,
+          temperature: Math.round(data.main.temp),
           city: data.name,
           country: data.sys.country,
           humidity: data.main.humidity,

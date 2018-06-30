@@ -20,12 +20,16 @@ class App extends React.Component
     wind: undefined,
     weatherId: undefined,
     error: undefined,
+    isGettingCurrent: null,
   }
 
   //arrow function to make api call
   getCurrentWeather = async(event) => {
     //prevent page from auto refreshing when user hits button
     event.preventDefault();
+
+    this.setState({isGettingCurrent: true});
+    console.log("Curr");
 
     //get user input from the form
     var city = event.target.elements.city.value;
@@ -65,7 +69,40 @@ class App extends React.Component
       this.setState({error: "Please fill out both fields."});
       alert("Please fill out both fields.");
     }
-    //console.log("test");
+  }
+
+  get5DayForecast = async(event) => {
+    event.preventDefault();
+
+    this.setState({isGettingCurrent: false});
+    console.log("5Day");
+
+    var city = event.target.city.value;
+    var country = event.target.country.value;
+
+    var apiCall = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&APPID=${API_KEY}&units=imperial`);
+    var data = await apiCall.json();
+
+    //make sure user fills out both fields
+    if(city && country) {
+      //make sure the entered city is actually a real one
+      if(data.message === "city not found") {
+        console.log(data);
+        this.setState({error: "Unknown location. Please try again."});
+        alert("Unknown location. Please try again.");
+      }
+      else {
+        console.log(data);
+        //update our states using the data in our json string. 
+        this.setState({
+
+        });
+      }
+    }
+    else {
+      this.setState({error: "Please fill out both fields."});
+      alert("Please fill out both fields.");
+    }
   }
 
   render() {
@@ -90,9 +127,9 @@ class App extends React.Component
       showWeatherImg = <CurrWeatherImg weatherId={this.state.weatherId} />;
     }
 
-    return (
-      <div className="MainDiv">
-        <Form getWeatherProp={this.getCurrentWeather} />
+    let whichOption = null;
+    if(this.state.isGettingCurrent === true) {
+      whichOption = (
         <div className="Current">
           <div className="Current1">
             {showWeather}
@@ -101,6 +138,19 @@ class App extends React.Component
             {showWeatherImg}
           </div>
         </div>
+      );
+    }
+    else if(this.state.isGettingCurrent === false) {
+      whichOption = <h1>Hello</h1>;
+    }
+
+    return (
+      <div className="MainDiv">
+        <Form 
+          getCurrentWeather={this.getCurrentWeather}
+          get5DayForecast={this.get5DayForecast} />
+        
+        {whichOption}
       </div>
     );
   }

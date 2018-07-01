@@ -21,6 +21,124 @@ class App extends React.Component
     weatherId: undefined,
     error: undefined,
     isGettingCurrent: null,
+
+    day1Forecast: {
+      name: null,
+      minTemp: null,
+      maxTemp: null,
+      icon: null
+    },
+    day2Forecast: {
+      name: null,
+      minTemp: null,
+      maxTemp: null,
+      icon: null
+    },
+    day3Forecast: {
+      name: null,
+      minTemp: null,
+      maxTemp: null,
+      icon: null
+    },
+    day4Forecast: {
+      name: null,
+      minTemp: null,
+      maxTemp: null,
+      icon: null
+    },
+    day5Forecast: {
+      name: null,
+      minTemp: null,
+      maxTemp: null,
+      icon: null
+    }
+  }
+
+  extractDateInfo = () => {
+    const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+    let pair = [];
+    let final = [];
+
+    let currentDate = new Date();
+    console.log(currentDate);
+
+    for(var i=1; i<=5; i++) {
+      var dayInfo = new Date();
+      dayInfo.setDate(dayInfo.getDate() + i);
+      
+      var day = days[dayInfo.getDay()];
+      
+      var date = dayInfo.getDate();
+      if(date.toString().length === 1) 
+        date = "0" + date;
+      
+      var month = dayInfo.getMonth() + 1;
+      if(month.toString().length === 1) 
+        month = "0" + month;
+      
+      var year = dayInfo.getFullYear();
+      var full = year + "-" + month + "-" + date;
+      
+      pair.push(day);
+      pair.push(full);
+      final.push(pair);
+      pair = [];
+    }
+
+    return final;
+  }
+
+  saveForecastInfo = (i, dateInfo, minTemp, maxTemp, icon) => {
+    if(i === 0) {
+      this.setState({
+        day1Forecast: {
+          name: dateInfo[i][0],
+          minTemp: minTemp,
+          maxTemp: maxTemp,
+          icon: icon
+        }
+      });
+    }
+    else if(i === 1) {
+      this.setState({
+        day2Forecast: {
+          name: dateInfo[i][0],
+          minTemp: minTemp,
+          maxTemp: maxTemp,
+          icon: icon
+        }
+      });
+    }
+    else if(i === 2) {
+      this.setState({
+        day3Forecast: {
+          name: dateInfo[i][0],
+          minTemp: minTemp,
+          maxTemp: maxTemp,
+          icon: icon
+        }
+      });
+    }
+    else if(i === 3) {
+      this.setState({
+        day4Forecast: {
+          name: dateInfo[i][0],
+          minTemp: minTemp,
+          maxTemp: maxTemp,
+          icon: icon
+        }
+      });
+    }
+    else if(i === 4) {
+      this.setState({
+        day5Forecast: {
+          name: dateInfo[i][0],
+          minTemp: minTemp,
+          maxTemp: maxTemp,
+          icon: icon
+        }
+      });
+    }
   }
 
   //arrow function to make api call
@@ -93,10 +211,39 @@ class App extends React.Component
       }
       else {
         console.log(data);
-        //update our states using the data in our json string. 
-        this.setState({
 
-        });
+        let temps = [];
+        let icon;
+        const dateInfo = this.extractDateInfo();
+        console.log(dateInfo);
+
+        for(var i=0; i<5; i++) {
+          for(var j=0; j<data.list.length; j++) {
+            if(data.list[j].dt_txt.includes(dateInfo[i][1])) {
+              console.log(data.list[j].dt_txt);
+              console.log(data.list[j].main.temp);
+
+              //get all the temps for that day
+              temps.push(data.list[j].main.temp);
+
+              //get the icon tag associated with time 12:00:00 for that day
+              if(data.list[j].dt_txt.includes("12:00:00")) {
+                icon = data.list[j].weather[0].icon;
+              }
+            }
+          }
+          let minTemp = Math.round(Math.min(...temps));
+          let maxTemp = Math.round(Math.max(...temps));
+          this.saveForecastInfo(i, dateInfo, minTemp, maxTemp, icon);
+          console.log(minTemp + ", " + maxTemp + ", " + icon);
+          temps = []; //reset
+        }
+
+        console.log(this.state.day1Forecast);
+        console.log(this.state.day2Forecast);
+        console.log(this.state.day3Forecast);
+        console.log(this.state.day4Forecast);
+        console.log(this.state.day5Forecast);
       }
     }
     else {

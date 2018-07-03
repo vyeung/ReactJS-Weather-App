@@ -1,6 +1,5 @@
 import React from "react";
 
-//import Titles from "./components/Titles";
 import Form from "./components/Form";
 import CurrentWeather from "./components/CurrentWeather";
 import CurrWeatherImg from "./components/CurrWeatherImg";

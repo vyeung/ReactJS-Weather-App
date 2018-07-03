@@ -3,3 +3,14 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+#root {
+  height: 100vh; /*root div covers whole screen*/
+}
+@media (max-width:500px) {
+  #root {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

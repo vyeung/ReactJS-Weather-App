@@ -1,10 +1,10 @@
 import React from "react";
-import rain from "../assets/rain.jpg";
-import thunderstorm from "../assets/thunderstorm.jpg";
-import clouds from "../assets/clouds.jpg";
-import clearSky from "../assets/clearSky.jpg";
-import snow from "../assets/snow.jpg";
-import other from "../assets/other.jpg";
+import rain from "../assets/CurrentWeatherPics/rain.jpg";
+import thunderstorm from "../assets/CurrentWeatherPics/thunderstorm.jpg";
+import clouds from "../assets/CurrentWeatherPics/clouds.jpg";
+import clearSky from "../assets/CurrentWeatherPics/clearSky.jpg";
+import snow from "../assets/CurrentWeatherPics/snow.jpg";
+import other from "../assets/CurrentWeatherPics/other.jpg";
 
 const CurrWeatherImg = (props) => {
   let image = null;

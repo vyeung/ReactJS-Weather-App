@@ -4,6 +4,7 @@ import React from "react";
 import Form from "./components/Form";
 import CurrentWeather from "./components/CurrentWeather";
 import CurrWeatherImg from "./components/CurrWeatherImg";
+import FiveDayForecast from "./components/FiveDayForecast";
 
 var API_KEY = "d5304abc4f34916873d7ce17376b4847";
 
@@ -220,8 +221,8 @@ class App extends React.Component
         for(var i=0; i<5; i++) {
           for(var j=0; j<data.list.length; j++) {
             if(data.list[j].dt_txt.includes(dateInfo[i][1])) {
-              console.log(data.list[j].dt_txt);
-              console.log(data.list[j].main.temp);
+              // console.log(data.list[j].dt_txt);
+              // console.log(data.list[j].main.temp);
 
               //get all the temps for that day
               temps.push(data.list[j].main.temp);
@@ -288,7 +289,14 @@ class App extends React.Component
       );
     }
     else if(this.state.isGettingCurrent === false) {
-      whichOption = <h1>Hello</h1>;
+      whichOption = (
+        <FiveDayForecast 
+          day1Forecast={this.state.day1Forecast}
+          day2Forecast={this.state.day2Forecast}
+          day3Forecast={this.state.day3Forecast}
+          day4Forecast={this.state.day4Forecast}
+          day5Forecast={this.state.day5Forecast} />
+      );
     }
 
     return (

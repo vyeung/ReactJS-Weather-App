@@ -255,9 +255,9 @@ class App extends React.Component
   render() {
     //return JSX code.
     //setting up props to connect our getWeather function which connects to the components.
-    let showWeather = null;
+    let showCurrWeather = null;
     if(this.state.temperature) {
-      showWeather = (
+      showCurrWeather = (
         <CurrentWeather 
           temperatureProp={this.state.temperature}
           cityProp={this.state.city}
@@ -269,26 +269,14 @@ class App extends React.Component
       );
     }
 
-    let showWeatherImg = null;
+    let showCurrWeatherImg = null;
     if(this.state.temperature) {
-      showWeatherImg = <CurrWeatherImg weatherId={this.state.weatherId} />;
+      showCurrWeatherImg = <CurrWeatherImg weatherId={this.state.weatherId} />;
     }
 
-    let whichOption = null;
-    if(this.state.isGettingCurrent === true) {
-      whichOption = (
-        <div className="Current">
-          <div className="Current1">
-            {showWeather}
-          </div>
-          <div className="Current2">
-            {showWeatherImg}
-          </div>
-        </div>
-      );
-    }
-    else if(this.state.isGettingCurrent === false) {
-      whichOption = (
+    let showFiveDay = null;
+    if(this.state.day1Forecast.name) {
+      showFiveDay = (
         <FiveDayForecast 
           day1Forecast={this.state.day1Forecast}
           day2Forecast={this.state.day2Forecast}
@@ -296,6 +284,23 @@ class App extends React.Component
           day4Forecast={this.state.day4Forecast}
           day5Forecast={this.state.day5Forecast} />
       );
+    }
+
+    let whichOption = null;
+    if(this.state.isGettingCurrent === true) {
+      whichOption = (
+        <div className="Current">
+          <div className="Current1">
+            {showCurrWeather}
+          </div>
+          <div className="Current2">
+            {showCurrWeatherImg}
+          </div>
+        </div>
+      );
+    }
+    else if(this.state.isGettingCurrent === false) {
+      whichOption = showFiveDay;
     }
 
     return (

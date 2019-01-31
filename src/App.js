@@ -1,6 +1,6 @@
 import React from "react";
 
-import Form from "./components/Form";
+import Form from "./components/form/Form";
 import CurrentWeather from "./components/CurrentWeather";
 import CurrWeatherImg from "./components/CurrWeatherImg";
 import FiveDayForecast from "./components/FiveDayForecast";

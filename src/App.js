@@ -22,132 +22,75 @@ class App extends React.Component
     error: undefined,
     isGettingCurrent: null,
 
-    day1Forecast: {
-      name: null,
-      minTemp: null,
-      maxTemp: null,
-      icon: null
-    },
-    day2Forecast: {
-      name: null,
-      minTemp: null,
-      maxTemp: null,
-      icon: null
-    },
-    day3Forecast: {
-      name: null,
-      minTemp: null,
-      maxTemp: null,
-      icon: null
-    },
-    day4Forecast: {
-      name: null,
-      minTemp: null,
-      maxTemp: null,
-      icon: null
-    },
-    day5Forecast: {
-      name: null,
-      minTemp: null,
-      maxTemp: null,
-      icon: null
+    fiveDayForecast: {
+      day1: {
+        name: null,
+        minTemp: null,
+        maxTemp: null,
+        icon: null
+      },
+      day2: {
+        name: null,
+        minTemp: null,
+        maxTemp: null,
+        icon: null
+      },
+      day3: {
+        name: null,
+        minTemp: null,
+        maxTemp: null,
+        icon: null
+      },
+      day4: {
+        name: null,
+        minTemp: null,
+        maxTemp: null,
+        icon: null
+      },
+      day5: {
+        name: null,
+        minTemp: null,
+        maxTemp: null,
+        icon: null
+      },
     }
   }
 
   extractDateInfo = () => {
     const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-    let pair = [];
-    let final = [];
+    let next5Days = [];
 
-    let currentDate = new Date();
-    console.log(currentDate);
-
+    //calculate the next 5 days. note that the API gives date in ISO format.
     for(var i=1; i<=5; i++) {
-      var dayInfo = new Date();
-      dayInfo.setDate(dayInfo.getDate() + i);
-      
-      var day = days[dayInfo.getDay()];
-      
-      var date = dayInfo.getDate();
-      if(date.toString().length === 1) 
-        date = "0" + date;
-      
-      var month = dayInfo.getMonth() + 1;
-      if(month.toString().length === 1) 
-        month = "0" + month;
-      
-      var year = dayInfo.getFullYear();
-      var full = year + "-" + month + "-" + date;
-      
-      pair.push(day);
-      pair.push(full);
-      final.push(pair);
-      pair = [];
-    }
+      const tomorrow = new Date();
+      const temp = new Date(tomorrow.setDate(tomorrow.getDate() + i));
+      const weekDay = days[temp.getDay()];
 
-    return final;
+      //example of a toISOString: 2019-02-01T20:26:15.506Z
+      const fullDate = new Date(temp).toISOString().split('T')[0];
+
+      next5Days.push([weekDay, fullDate]);
+    }
+    return next5Days;
   }
 
   saveForecastInfo = (i, dateInfo, minTemp, maxTemp, icon) => {
-    if(i === 0) {
-      this.setState({
-        day1Forecast: {
-          name: dateInfo[i][0],
-          minTemp: minTemp,
-          maxTemp: maxTemp,
-          icon: icon
-        }
-      });
-    }
-    else if(i === 1) {
-      this.setState({
-        day2Forecast: {
-          name: dateInfo[i][0],
-          minTemp: minTemp,
-          maxTemp: maxTemp,
-          icon: icon
-        }
-      });
-    }
-    else if(i === 2) {
-      this.setState({
-        day3Forecast: {
-          name: dateInfo[i][0],
-          minTemp: minTemp,
-          maxTemp: maxTemp,
-          icon: icon
-        }
-      });
-    }
-    else if(i === 3) {
-      this.setState({
-        day4Forecast: {
-          name: dateInfo[i][0],
-          minTemp: minTemp,
-          maxTemp: maxTemp,
-          icon: icon
-        }
-      });
-    }
-    else if(i === 4) {
-      this.setState({
-        day5Forecast: {
-          name: dateInfo[i][0],
-          minTemp: minTemp,
-          maxTemp: maxTemp,
-          icon: icon
-        }
-      });
-    }
+    const updated = {...this.state.fiveDayForecast};
+    
+    let setDay = "day" + (i+1);
+    updated[setDay].name = dateInfo[i][0];
+    updated[setDay].minTemp = minTemp;
+    updated[setDay].maxTemp = maxTemp;
+    updated[setDay].icon = icon;
+    
+    this.setState({fiveDayForecast: updated});
   }
 
   //arrow function to make api call
   getCurrentWeather = async(event) => {
-    //prevent page from auto refreshing when user hits button
+    //prevent page refresh when user hits button
     event.preventDefault();
-
     this.setState({isGettingCurrent: true});
-    console.log("Curr");
 
     //get user input from the form
     var city = event.target.elements.city.value;
@@ -169,8 +112,7 @@ class App extends React.Component
       }
       else {
         console.log(data);
-        //update our states using the data in our json string. 
-        //notice that weather is an array.
+        //update states using data in our json string. note that weather is an array.
         this.setState({
           temperature: Math.round(data.main.temp),
           city: data.name,
@@ -191,9 +133,7 @@ class App extends React.Component
 
   get5DayForecast = async(event) => {
     event.preventDefault();
-
     this.setState({isGettingCurrent: false});
-    console.log("5Day");
 
     var city = event.target.city.value;
     var country = event.target.country.value;
@@ -201,7 +141,6 @@ class App extends React.Component
     var apiCall = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&APPID=${API_KEY}&units=imperial`);
     var data = await apiCall.json();
 
-    //make sure user fills out both fields
     if(city && country) {
       //make sure the entered city is actually a real one
       if(data.message === "city not found") {
@@ -211,7 +150,6 @@ class App extends React.Component
       }
       else {
         console.log(data);
-
         let temps = [];
         let icon;
         const dateInfo = this.extractDateInfo();
@@ -220,30 +158,26 @@ class App extends React.Component
         for(var i=0; i<5; i++) {
           for(var j=0; j<data.list.length; j++) {
             if(data.list[j].dt_txt.includes(dateInfo[i][1])) {
-              // console.log(data.list[j].dt_txt);
-              // console.log(data.list[j].main.temp);
-
               //get all the temps for that day
               temps.push(data.list[j].main.temp);
 
               //get the icon tag associated with time 12:00:00 for that day
-              if(data.list[j].dt_txt.includes("12:00:00")) {
+              if(data.list[j].dt_txt.includes("12:00:00"))
                 icon = data.list[j].weather[0].icon;
-              }
             }
           }
           let minTemp = Math.round(Math.min(...temps));
           let maxTemp = Math.round(Math.max(...temps));
+
           this.saveForecastInfo(i, dateInfo, minTemp, maxTemp, icon);
-          console.log(minTemp + ", " + maxTemp + ", " + icon);
           temps = []; //reset
         }
 
-        console.log(this.state.day1Forecast);
-        console.log(this.state.day2Forecast);
-        console.log(this.state.day3Forecast);
-        console.log(this.state.day4Forecast);
-        console.log(this.state.day5Forecast);
+        console.log(this.state.fiveDayForecast.day1);
+        console.log(this.state.fiveDayForecast.day2);
+        console.log(this.state.fiveDayForecast.day3);
+        console.log(this.state.fiveDayForecast.day4);
+        console.log(this.state.fiveDayForecast.day5);
       }
     }
     else {
@@ -254,7 +188,7 @@ class App extends React.Component
 
   render() {
     //return JSX code.
-    //setting up props to connect our getWeather function which connects to the components.
+    //setting up props to connect our getWeather functions to the other cmpts.
     let showCurrWeather = null;
     if(this.state.temperature) {
       showCurrWeather = (
@@ -275,41 +209,35 @@ class App extends React.Component
     }
 
     let showFiveDay = null;
-    if(this.state.day1Forecast.name) {
+    if(this.state.fiveDayForecast.day1.name) {
       showFiveDay = (
         <FiveDayForecast 
-          day1Forecast={this.state.day1Forecast}
-          day2Forecast={this.state.day2Forecast}
-          day3Forecast={this.state.day3Forecast}
-          day4Forecast={this.state.day4Forecast}
-          day5Forecast={this.state.day5Forecast} />
+          day1Forecast={this.state.fiveDayForecast.day1}
+          day2Forecast={this.state.fiveDayForecast.day2}
+          day3Forecast={this.state.fiveDayForecast.day3}
+          day4Forecast={this.state.fiveDayForecast.day4}
+          day5Forecast={this.state.fiveDayForecast.day5} />
       );
-    }
-
-    let whichOption = null;
-    if(this.state.isGettingCurrent === true) {
-      whichOption = (
-        <div className="Current">
-          <div className="Current1">
-            {showCurrWeather}
-          </div>
-          <div className="Current2">
-            {showCurrWeatherImg}
-          </div>
-        </div>
-      );
-    }
-    else if(this.state.isGettingCurrent === false) {
-      whichOption = showFiveDay;
     }
 
     return (
       <div className="MainDiv">
         <Form 
           getCurrentWeather={this.getCurrentWeather}
-          get5DayForecast={this.get5DayForecast} />
-        
-        {whichOption}
+          get5DayForecast={this.get5DayForecast} 
+        />
+
+        {this.state.isGettingCurrent ? 
+          <div className="Current">
+            <div className="Current1">
+              {showCurrWeather}
+            </div>
+            <div className="Current2">
+              {showCurrWeatherImg}
+            </div>
+          </div>
+          :
+          showFiveDay}
       </div>
     );
   }

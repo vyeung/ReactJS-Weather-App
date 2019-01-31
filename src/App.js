@@ -1,7 +1,7 @@
 import React from "react";
 
 import Form from "./components/form/Form";
-import CurrentWeather from "./components/CurrentWeather";
+import CurrWeather from "./components/currWeather/currWeather";
 import CurrWeatherImg from "./components/CurrWeatherImg";
 import FiveDayForecast from "./components/FiveDayForecast";
 
@@ -192,7 +192,7 @@ class App extends React.Component
     let showCurrWeather = null;
     if(this.state.temperature) {
       showCurrWeather = (
-        <CurrentWeather 
+        <CurrWeather 
           temperatureProp={this.state.temperature}
           cityProp={this.state.city}
           countryProp={this.state.country}

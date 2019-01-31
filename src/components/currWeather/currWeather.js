@@ -1,6 +1,6 @@
 import React from "react";
 
-const CurrentWeather = (props) => {
+const currWeather = (props) => {
   return (
     <div className="WeatherDiv">
       <p className="WeatherKey">Location:
@@ -26,4 +26,4 @@ const CurrentWeather = (props) => {
   );
 }
 
-export default CurrentWeather;
+export default currWeather;

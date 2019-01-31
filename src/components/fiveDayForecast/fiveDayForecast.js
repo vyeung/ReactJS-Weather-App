@@ -1,17 +1,17 @@
 import React from "react";
-import "./FiveDayForecast.css";
+import "./fiveDayForecast.css";
 
-import clearDay from "../assets/SingleForecastPics/clearDay.png";
-import clearNight from "../assets/SingleForecastPics/clearNight.png";
-import partlyCloudyDay from "../assets/SingleForecastPics/partlyCloudyDay.png";
-import partlyCloudyNight from "../assets/SingleForecastPics/partlyCloudyNight.png";
-import allCloudy from "../assets/SingleForecastPics/allCloudy.png";
-import rain from "../assets/SingleForecastPics/rain.png";
-import tStorm from "../assets/SingleForecastPics/tStorm.png";
-import snow from "../assets/SingleForecastPics/snow.png";
-import other from "../assets/SingleForecastPics/other.png";
+import clearDay from "../../assets/SingleForecastPics/clearDay.png";
+import clearNight from "../../assets/SingleForecastPics/clearNight.png";
+import partlyCloudyDay from "../../assets/SingleForecastPics/partlyCloudyDay.png";
+import partlyCloudyNight from "../../assets/SingleForecastPics/partlyCloudyNight.png";
+import allCloudy from "../../assets/SingleForecastPics/allCloudy.png";
+import rain from "../../assets/SingleForecastPics/rain.png";
+import tStorm from "../../assets/SingleForecastPics/tStorm.png";
+import snow from "../../assets/SingleForecastPics/snow.png";
+import other from "../../assets/SingleForecastPics/other.png";
 
-const FiveDayForecast = (props) => {
+const fiveDayForecast = (props) => {
 
   let forecastImg1 = null;
   if(props.day1Forecast.icon === "01d")
@@ -183,4 +183,4 @@ const FiveDayForecast = (props) => {
   );
 }
 
-export default FiveDayForecast;
+export default fiveDayForecast;

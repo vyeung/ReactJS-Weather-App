@@ -3,7 +3,7 @@ import React from "react";
 import Form from "./components/form/Form";
 import CurrWeather from "./components/currWeather/currWeather";
 import CurrWeatherImg from "./components/currWeather/currWeatherImg";
-import FiveDayForecast from "./components/FiveDayForecast";
+import FiveDayForecast from "./components/fiveDayForecast/fiveDayForecast";
 
 var API_KEY = "d5304abc4f34916873d7ce17376b4847";
 

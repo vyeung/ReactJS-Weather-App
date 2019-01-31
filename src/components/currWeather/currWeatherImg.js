@@ -1,12 +1,13 @@
 import React from "react";
-import rain from "../assets/CurrentWeatherPics/rain.jpg";
-import thunderstorm from "../assets/CurrentWeatherPics/thunderstorm.jpg";
-import clouds from "../assets/CurrentWeatherPics/clouds.jpg";
-import clearSky from "../assets/CurrentWeatherPics/clearSky.jpg";
-import snow from "../assets/CurrentWeatherPics/snow.jpg";
-import other from "../assets/CurrentWeatherPics/other.jpg";
 
-const CurrWeatherImg = (props) => {
+import rain from "../../assets/CurrentWeatherPics/rain.jpg";
+import thunderstorm from "../../assets/CurrentWeatherPics/thunderstorm.jpg";
+import clouds from "../../assets/CurrentWeatherPics/clouds.jpg";
+import clearSky from "../../assets/CurrentWeatherPics/clearSky.jpg";
+import snow from "../../assets/CurrentWeatherPics/snow.jpg";
+import other from "../../assets/CurrentWeatherPics/other.jpg";
+
+const currWeatherImg = (props) => {
   let image = null;
 
   if(props.weatherId >= 200 && props.weatherId <= 232)
@@ -27,4 +28,4 @@ const CurrWeatherImg = (props) => {
   return image;
 }
 
-export default CurrWeatherImg;
+export default currWeatherImg;

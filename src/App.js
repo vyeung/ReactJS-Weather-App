@@ -119,7 +119,7 @@ class App extends React.Component
           country: data.sys.country,
           humidity: data.main.humidity,
           description: data.weather[0].description,
-          wind: data.wind.speed,
+          wind: Math.round(data.wind.speed),
           weatherId: data.weather[0].id,
           error: "",
         });

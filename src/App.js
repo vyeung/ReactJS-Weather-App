@@ -97,7 +97,7 @@ class App extends React.Component
     var country = event.target.elements.country.value;
 
     //make api call to OpenWeatherMap using fetch and template string
-    var apiCall = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&APPID=${API_KEY}&units=imperial`);
+    var apiCall = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&APPID=${API_KEY}&units=imperial`);
 
     //convert data we get back to json
     var data = await apiCall.json();
@@ -138,7 +138,7 @@ class App extends React.Component
     var city = event.target.city.value;
     var country = event.target.country.value;
 
-    var apiCall = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&APPID=${API_KEY}&units=imperial`);
+    var apiCall = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&APPID=${API_KEY}&units=imperial`);
     var data = await apiCall.json();
 
     if(city && country) {

@@ -2,7 +2,10 @@
 
 ![screenshot](./src/assets/screenshot.png)
 
-Enter a city and its country.  Find out the current weather conditions there (temp, humidity, wind speed, description) or get a 5-day forecast!  
+***
+
+\[**Description**\]
+* This app quickly shows the weather of a specified location.  After entering a city and its country, the user can go between seeing the current weather there (temp, humidity, wind speed, overall conditions) or getting a 5-day forecast.  
 
 ***
 
@@ -16,4 +19,6 @@ Enter a city and its country.  Find out the current weather conditions there (te
 [**How to Run**\]
 1. clone/download repo.
 2. go to folder path and do npm install.
-3. do npm start.
+3. npm start
+
+* Or visit deployment link: https://vyeung.github.io/ReactJS-Weather-App

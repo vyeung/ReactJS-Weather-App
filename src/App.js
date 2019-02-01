@@ -210,14 +210,7 @@ class App extends React.Component
 
     let showFiveDay = null;
     if(this.state.fiveDayForecast.day1.name) {
-      showFiveDay = (
-        <FiveDayForecast 
-          day1Forecast={this.state.fiveDayForecast.day1}
-          day2Forecast={this.state.fiveDayForecast.day2}
-          day3Forecast={this.state.fiveDayForecast.day3}
-          day4Forecast={this.state.fiveDayForecast.day4}
-          day5Forecast={this.state.fiveDayForecast.day5} />
-      );
+      showFiveDay = <FiveDayForecast fiveDayData={this.state.fiveDayForecast} />;
     }
 
     return (
